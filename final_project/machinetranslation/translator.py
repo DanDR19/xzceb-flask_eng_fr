@@ -7,7 +7,6 @@ from ibm_watson import LanguageTranslatorV3
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from dotenv import load_dotenv
 
-
 class Translator:
     """
     Translator English-French using IBM Watson API
@@ -25,8 +24,6 @@ class Translator:
             authenticator=self.__authenticator
         )
         self.language_translator.set_service_url(self.__url)
-        self.language_translator.set_disable_ssl_verification(True)
-
 
     def english_to_french(self, english_text):
         """
@@ -36,12 +33,13 @@ class Translator:
         english_text: string
         ---
         """
-        translation=self.language_translator.translate(
-            text=english_text,
-            model_id='en-fr').get_result()
-
-        return translation.translations[0].translation
-
+        translated = None
+        if english_text is not None and isinstance(english_text, str):
+            translation=self.language_translator.translate(
+                text=english_text,
+                model_id='en-fr').get_result()
+            translated = translation["translations"][0]["translation"]
+        return translated
 
     def french_to_english(self, french_text):
         """
@@ -51,8 +49,10 @@ class Translator:
         french_text: string
         ---
         """
-        translation=self.language_translator.translate(
-            text=french_text,
-            model_id='fr-en').get_result()
-
-        return translation.translations[0].translation
+        translated = None
+        if french_text is not None and isinstance(french_text, str):
+            translation=self.language_translator.translate(
+                text=french_text,
+                model_id='fr-en').get_result()
+            translated = translation["translations"][0]["translation"]
+        return translated

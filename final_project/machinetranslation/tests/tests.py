@@ -14,18 +14,18 @@ class TestTranslator(unittest.TestCase):
         Test english to french method
         """
         translator_object = translator.Translator()
-        self.assertEqual(translator_object.english_to_french(None), "")
-        self.assertEqual(translator_object.english_to_french("Hello"), "Hello")
-        self.assertEqual(translator_object.english_to_french("Bonjour"), "Hello")
+        self.assertEqual(translator_object.english_to_french(None), None)
+        self.assertEqual(translator_object.english_to_french("Hello"), "Bonjour")
+        self.assertEqual(translator_object.english_to_french("Bonjour"), "Bonjour")
 
     def test_french_to_english(self):
         """
         Test french to english method
         """
         translator_object = translator.Translator()
-        self.assertEqual(translator_object.french_to_english(None), "")
-        self.assertEqual(translator_object.french_to_english("Hello"), "Bonjour")
-        self.assertEqual(translator_object.french_to_english("Bonjour"), "Bonjour")
+        self.assertEqual(translator_object.french_to_english(None), None)
+        self.assertEqual(translator_object.french_to_english("Bonjour"), "Hello")
+        self.assertEqual(translator_object.french_to_english("Hello"), "Hello")
 
 if __name__=="__main__":
     unittest.main()
